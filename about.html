@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css"> 
+        
+        <script type="text/javascript">
+            // <![CDATA[
+            var speed=33; // lower number for faster
+            var drops=100; // number of 'drops'
+            var colour="#999"; // colour of drops (generally grey!)
+            
+            /***************************\
+            *   Rainy Afternoon Effect  *
+            *(c)2011-13 mf2fm web-design*
+            *  http://www.mf2fm.com/rv  *
+            * DON'T EDIT BELOW THIS BOX *
+            \***************************/
+            
+            var flks=new Array();
+            var flkx=new Array();
+            var flky=new Array();
+            var fldy=new Array();
+            var swide, shigh, boddie;
+            var ie_version=(navigator.appVersion.indexOf("MSIE")!=-1)?parseFloat(navigator.appVersion.split("MSIE")[1]):false;
+            
+            function addLoadEvent(funky) {
+              var oldonload=window.onload;
+              if (typeof(oldonload)!='function') window.onload=funky;
+              else window.onload=function() {
+                if (oldonload) oldonload();
+                funky();
+              }
+            }
+            
+            addLoadEvent(storm);
+            
+            function storm() { if (document.getElementById) {
+              var r1, r2;
+              boddie=document.createElement("div");
+              boddie.style.position="fixed";
+              boddie.style.top="0px";
+              boddie.style.left="0px";
+              boddie.style.width="1px";
+              boddie.style.height="1px";
+              boddie.style.overflow="visible";
+              boddie.style.backgroundColor="transparent";
+              document.body.appendChild(boddie);
+              set_width();
+              for (var i=0; i<drops; i++) {
+                flks[i]=createDiv(16, 2, "transparent");
+                r1=createDiv(6, 2, colour);
+                r1.style.top="10px";
+                r1.style.left="0px";
+                flks[i].appendChild(r1);
+                r2=createDiv(10, 2, colour);
+                r2.style.top="0px";
+                r2.style.left="0px";
+                if (ie_version && ie_version<10) r2.style.filter="alpha(opacity=25)";
+                else r2.style.opacity=0.25;
+                flks[i].appendChild(r2);
+                flkx[i]=2*Math.floor(Math.random()*swide/2);
+                flky[i]=Math.floor(Math.random()*shigh);
+                fldy[i]=2+Math.floor(Math.random()*4);
+                flks[i].style.left=flkx[i]+"px";
+                flks[i].style.top=flky[i]+"px";
+                boddie.appendChild(flks[i]);
+              }
+              setInterval("cats_and_dogs()", speed);
+            }}
+            
+            function createDiv(height, width, colour) {
+              var div=document.createElement("div");
+              div.style.position="absolute";
+              div.style.height=height+"px";
+              div.style.width=width+"px";
+              div.style.overflow="hidden";
+              div.style.backgroundColor=colour;
+              return (div);
+            }
+            
+            window.onresize=set_width;
+            function set_width() {
+              var sw_min=999999;
+              var sh_min=999999;
+              if (document.documentElement && document.documentElement.clientWidth) {
+                sw_min=document.documentElement.clientWidth;
+                sh_min=document.documentElement.clientHeight;
+              }
+              if (typeof(self.innerWidth)!="undefined" && self.innerWidth) {
+                if (self.innerWidth<sw_min) sw_min=self.innerWidth;
+                if (self.innerHeight<sh_min) sh_min=self.innerHeight;
+              }
+              if (document.body.clientWidth) {
+                if (document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+                if (document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+              }
+              if (sw_min==999999 || sh_min==999999) {
+                sw_min=800;
+                sh_min=600;
+              }
+              swide=sw_min-2;
+              shigh=sh_min;
+            }
+            
+            function cats_and_dogs(c) {
+              var i, x, o=0;
+              for (i=0; i<drops; i++) {
+                flky[i]+=fldy[i];
+                if (flky[i]>=shigh-16) {
+                  flky[i]=-16;
+                  fldy[i]=2+Math.floor(Math.random()*4);
+                  flkx[i]=2*Math.floor(Math.random()*swide/2);
+                  flks[i].style.left=flkx[i]+"px";
+                }
+                flks[i].style.top=flky[i]+"px";
+              }
+            }
+            // ]]>
+            </script>
+    </head>
+
+    <body>
+        <img src="title.gif">
+        <br>
+        <nav>
+          <a href="index.html" id="menu">home</a><br>
+          <a href="split.html" id="menu">split</a><br>
+          <a href="about.html" id="menu">about</a><br>
+          </nav>
+          <br>
+    </body>
+    <p id="text"><br>
+      !! work in progress page !!
+      <br><br>
+      hi, i'm jesse/alya and i made this little minicomic, along with this site and it's elements!
+      <br><br>except for the rain javascript, that's <i>©2011-13 mf2fm web-design</i> :)
+      <br><br>if you are coming here from my advanced projects class,
+      hi! so glad that you scanned my qr code :)
+      <br><br>i've been so frustrated lately, since i've had this one idea stuck in my head, but it was too abstract to get out.
+      <br>it took me months for me to finalize on this minicomic as a project to fuel my creativity, and i put all my artistic energy into it.
+      <br><br>to anyone dealing with bpd, such as i, just know that as long as you communicate with your loved ones, and you seek proper support, you're not a monster.
+      </p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">var scrolltotop={setting:{startline:100,scrollto:0,scrollduration:1e3,fadeduration:[500,100]},controlHTML:'<img src="https://i1155.photobucket.com/albums/p559/scrolltotop/arrow36.png" />',controlattrs:{offsetx:5,offsety:5},anchorkeyword:"#top",state:{isvisible:!1,shouldvisible:!1},scrollup:function(){this.cssfixedsupport||this.$control.css({opacity:0});var t=isNaN(this.setting.scrollto)?this.setting.scrollto:parseInt(this.setting.scrollto);t="string"==typeof t&&1==jQuery("#"+t).length?jQuery("#"+t).offset().top:0,this.$body.animate({scrollTop:t},this.setting.scrollduration)},keepfixed:function(){var t=jQuery(window),o=t.scrollLeft()+t.width()-this.$control.width()-this.controlattrs.offsetx,s=t.scrollTop()+t.height()-this.$control.height()-this.controlattrs.offsety;this.$control.css({left:o+"px",top:s+"px"})},togglecontrol:function(){var t=jQuery(window).scrollTop();this.cssfixedsupport||this.keepfixed(),this.state.shouldvisible=t>=this.setting.startline?!0:!1,this.state.shouldvisible&&!this.state.isvisible?(this.$control.stop().animate({opacity:1},this.setting.fadeduration[0]),this.state.isvisible=!0):0==this.state.shouldvisible&&this.state.isvisible&&(this.$control.stop().animate({opacity:0},this.setting.fadeduration[1]),this.state.isvisible=!1)},init:function(){jQuery(document).ready(function(t){var o=scrolltotop,s=document.all;o.cssfixedsupport=!s||s&&"CSS1Compat"==document.compatMode&&window.XMLHttpRequest,o.$body=t(window.opera?"CSS1Compat"==document.compatMode?"html":"body":"html,body"),o.$control=t('<div id="topcontrol">'+o.controlHTML+"</div>").css({position:o.cssfixedsupport?"fixed":"absolute",bottom:o.controlattrs.offsety,right:o.controlattrs.offsetx,opacity:0,cursor:"pointer"}).attr({title:"Scroll to Top"}).click(function(){return o.scrollup(),!1}).appendTo("body"),document.all&&!window.XMLHttpRequest&&""!=o.$control.text()&&o.$control.css({width:o.$control.width()}),o.togglecontrol(),t('a[href="'+o.anchorkeyword+'"]').click(function(){return o.scrollup(),!1}),t(window).bind("scroll resize",function(t){o.togglecontrol()})})}};scrolltotop.init();</script>
+
+</html>
